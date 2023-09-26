@@ -40,6 +40,7 @@ $hotels = [
 
 ];
 
+
 ?>
 
 
@@ -66,18 +67,43 @@ $hotels = [
 </head>
 
 <body>
-  <?php foreach ($hotels as $hotel): ?>
-  <ul>
+  <div class="container">
 
-    <?php foreach ($hotel as $key => $value): ?>
-    <li>
-      <?= $key; ?>:
-      <?= $value; ?>
-    </li>
-    <?php endforeach; ?>
+    <table class="table table-hover">
 
-  </ul>
-  <?php endforeach; ?>
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Parking</th>
+          <th scope="col">Vote</th>
+          <th scope="col">Distance to Center</th>
+        </tr>
+
+      </thead>
+      <tbody>
+        <?php foreach ($hotels as $hotel): ?>
+        <tr>
+
+          <?php foreach ($hotel as $key => $value): ?>
+
+          <td>
+            <?= $value; ?>
+          </td>
+
+
+
+          <?php endforeach; ?>
+
+        </tr>
+        <?php endforeach; ?>
+
+      </tbody>
+
+    </table>
+  </div>
+
+
 
 
   <!-- DIV VUE.JS -->
