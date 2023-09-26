@@ -40,6 +40,31 @@ $hotels = [
 
 ];
 
+$form_sent = !empty($_POST);
+$check_parking = $POST["checkparking"];
+$vote_hotel = $POST["vote_hotel"];
+var_dump($check_parking);
+var_dump($vote_hotel);
+
+
+
+foreach ($hotels as $hotel) {
+}
+;
+
+$hotels_filters = [];
+
+if ($form_sent) {
+  foreach ($hotels as $hotel) {
+    if (in_array("true", $hotel)) {
+      array_push($hotels_filters, $hotel);
+    }
+
+  }
+}
+;
+
+
 
 ?>
 
@@ -69,34 +94,68 @@ $hotels = [
 <body>
   <div class="container">
 
+    <!-- Filtri -->
+    <form action="" method="POST">
+      <div class="form-check ">
+        <!-- Filtro parcheggio -->
+        <input class="form-check-input" type="checkbox" value="parking" id="checkparking" name="key[]">
+        <label class="form-check-label" for="checkparking">
+          Hotel with Parking
+        </label>
+        <select class="form-select my-2 w-25" aria-label="Default select example" name="vote_hotel">
+          <option selected>Hotel Vote</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+
+
+        </select>
+        <div>
+          <button class="btn btn-primary">Invia</button>
+        </div>
+      </div>
+    </form>
+
+
+
+    <!-- Tabella Hotels -->
     <table class="table table-hover">
 
       <thead>
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Parking</th>
-          <th scope="col">Vote</th>
-          <th scope="col">Distance to Center</th>
+          <?php foreach ($hotel as $key => $value): ?>
+          <th scope="col">
+            <? echo ucfirst($key); ?>
+          </th>
+          <?php endforeach; ?>
         </tr>
-
       </thead>
       <tbody>
+        <?php if (!$form_sent): ?>
         <?php foreach ($hotels as $hotel): ?>
         <tr>
-
           <?php foreach ($hotel as $key => $value): ?>
-
           <td>
             <?= $value; ?>
           </td>
-
-
-
           <?php endforeach; ?>
-
         </tr>
         <?php endforeach; ?>
+
+        <?php else: ?>
+        <?php foreach ($hotels_filters as $hotel): ?>
+        <tr>
+          <?php foreach ($hotel as $key => $value): ?>
+          <td>
+            <?= $value; ?>
+          </td>
+          <?php endforeach; ?>
+        </tr>
+        <?php endforeach; ?>
+        <?php endif; ?>
+
 
       </tbody>
 
